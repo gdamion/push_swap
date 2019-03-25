@@ -6,7 +6,14 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:52 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/03/25 12:03:53 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/03/25 12:58:56 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
+# include "common.h"
+
+
+#endif

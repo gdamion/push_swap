@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/06 11:09:18 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/06 16:56:16 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,62 +38,62 @@ long long ft_atoi_simple_big(char *str)
 
 // //// MAIN OPS ////
 
-// int	s_add(t_list **s, int num)
-// {
+int	s_add(t_list **s, int num)
+{
 
-// 	return (0);
-// }
+	return (0);
+}
 
-// int	s_swap(t_list **s)
-// {
+int	s_swap(t_list **s)
+{
 
-// 	return (0);
-// }
+	return (0);
+}
 
-// int	s_swap_both(t_list **s1, t_list **s2)
-// {
-// 	s_swap(s1);
-// 	s_swap(s2);
-// 	return (0);
-// }
+int	s_swap_both(t_list **s1, t_list **s2)
+{
+	s_swap(s1);
+	s_swap(s2);
+	return (0);
+}
 
-// int	s_push(t_list **s)
-// {
+int	s_push(t_list **s)
+{
 
-// 	return (0);
-// }
+	return (0);
+}
 
-// int	s_push_both(t_list **s1, t_list **s2)
-// {
-// 	s_push(s1);
-// 	s_push(s2);
-// 	return (0);
-// }
+int	s_push_both(t_list **s1, t_list **s2)
+{
+	s_push(s1);
+	s_push(s2);
+	return (0);
+}
 
-// int	s_rotate(t_list **s)
-// {
+int	s_rotate(t_list **s)
+{
 
-// 	return (0);
-// }
+	return (0);
+}
 
-// int	s_rotate_both(t_list **s1, t_list **s2)
-// {
-// 	s_rotate(s1);
-// 	s_rotate(s2);
-// 	return (0);
-// }
+int	s_rotate_both(t_list **s1, t_list **s2)
+{
+	s_rotate(s1);
+	s_rotate(s2);
+	return (0);
+}
 
-// int	s_rev_rotate(t_list **s)
-// {
+int	s_rev_rotate(t_list **s)
+{
 
-// 	return (0);
-// }
+	return (0);
+}
 
-// int	s_rev_rotate_both(t_list **s1, t_list **s2)
-// {
-// 	s_rev_rotate(s1);
-// 	s_rev_rotate(s2);
-// 	return (0);
-// }
+int	s_rev_rotate_both(t_list **s1, t_list **s2)
+{
+	s_rev_rotate(s1);
+	s_rev_rotate(s2);
+	return (0);
+}
 
 // ////

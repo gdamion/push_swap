@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/05 15:13:37 by pcollio-         ###   ########.fr       */
+/*   Updated: 2019/04/06 11:33:50 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,65 @@
 
 int main(int argc, char **argv)
 {
-	t_list	*cmds;
-	t_list	*nums;
+	t_lswap	*cmds;
+	t_lswap	*nums;
 	
+	nums = (t_lswap*)malloc(sizeof(t_list));
+	cmds = (t_lswap*)malloc(sizeof(t_list));
+	ft_printf("ok0\n");
 	process_stack(&argc, &argv, &nums); //читаем стэк чисел, проверияем на правильность
+	ft_printf("ok1\n");
 	read_instructions(&cmds);
+	ft_printf("ok2\n");
 	result(cmds, nums);
 	return (0);
 }
 
+//gcc src/checker/checker.c  src/common/common.c -L. -lft
+
 /////проверка для входного стэка чисел
-int		process_stack(int *argc, char ***argv, t_list **nums)
+int		process_stack(int *argc, char ***argv,	t_lswap **nums)
 {
 	long long num;
-	t_list	*nums_check;
+	t_lswap	*nums_check;
+	int i;
 
+	i = 1;
 	if (*argc < 2)
 		error();
+	ft_printf("ok p1\n");
 	(*nums)->prev = NULL; //у первого элемента нет элемента до него (кэп)
-	while (argc > 1)
+	while (i < *argc)
 	{
-		if ((*nums)->prev != NULL)
+		ft_printf("ok p2\n");
+		if (i > 0)
 		{
+			ft_printf("ok p inner\n");
 			nums_check = *nums; //записываем данный элемент списка в буфер
 			(*nums) = (*nums)->next; //переходим на следующий элемент
+			*nums = (t_lswap*)malloc(sizeof(t_list));
 			(*nums)->prev = nums_check; //сохраняем связь с предыдущим элементом
 		}
+		ft_printf("ok p3\n");
 		nums_check = *nums;
-		num = ft_atoi_ps((*argv)[*argc - 1]);
+		ft_printf("ok p31\n");
+		num = ft_atoi_simple_big((*argv)[i]);
+		ft_printf("ok p32\n");
 		if (num < -2147483648 || 2147483647 < num)//проверяем на то, действительно ли число вмещается в int
 			error();
+		ft_printf("ok p4\n");
 		while (nums_check->prev != NULL)//пока не дошли до самого конца стека, проверяем на дубликат
 		{
 			if (num == nums_check->num)
 				error();
 			nums_check = nums_check->prev;
 		}
+		ft_printf("ok p5\n\n");
 		(*nums)->num = (int)num; //пишем нужное число
 		argc--;
+		i++;
 	}
+	ft_printf("ok p6\n");
 	(*nums)->next = NULL; //замыкаем список
 	return (0);
 }
@@ -77,16 +97,39 @@ int	check_intruction(const char *cmd)
 	return (a);
 }
 
-// Ввели команду, нажали ENTER, гнл считал
-// rd != 0? тогда применяем команду, проверив на правильность, и ждем следующего нажатия ENTER
-// rd == 0? тогда выводим вердикт
-void	read_intructions(t_list **cmds)
+void	read_instructions(t_lswap **cmds)
 {
-	while()
-		!(check_intruction()) ? error() : 1;
+	char *buf;
+	int cmd_type;
+	t_lswap *cmds_buf;
+
+	buf = NULL;
+	(*cmds)->prev = NULL;
+	while(get_next_line(1, &buf) != 0)
+	{
+		!(cmd_type = check_intruction(buf)) ? error() : 1;
+		if ((*cmds)->prev != NULL)
+		{
+			cmds_buf = *cmds; //записываем данный элемент списка в буфер
+			(*cmds) = (*cmds)->next; //переходим на следующий элемент
+			(*cmds)->prev = cmds_buf; //сохраняем связь с предыдущим элементом
+		}
+		(*cmds)->num = cmd_type; //пишем нужный номер команды
+	}
+	(*cmds)->next = NULL; //замыкаем список
+	while ((*cmds)->prev != NULL) // возвращаемся в начало списка
+		*cmds = (*cmds)->prev;
 }
 
-void	result()
+void	result(t_lswap *cmds, t_lswap *nums)
 {
-
+	while (cmds->next != NULL)
+	{
+		ft_printf("%d ", cmds->num);
+	}
+	ft_printf("\n\n");
+	while (nums->prev != NULL)
+	{
+		ft_printf("%d ", nums->num);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/05 14:14:28 by pcollio-         ###   ########.fr       */
+/*   Updated: 2019/04/06 16:56:16 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,23 @@ void error()
 
 //// MY SPECIAL ATOI //// для больших чисел, нужно ведь как-то проверить, что число вписывается в int
 
-long long ft_atoi_simple_big()
+long long ft_atoi_simple_big(char *str)
 {
+	long long res;
 
+	res = 0;
+	while (*str != '\0')
+	{
+		if (*str < '0' && '9' < *str)
+			error();
+		res = res * 10 + (int)(*str) - 48;
+		str++;
+	}
+	return (res);
 }
 
 
-//// MAIN OPS ////
+// //// MAIN OPS ////
 
 int	s_add(t_list **s, int num)
 {
@@ -86,4 +96,4 @@ int	s_rev_rotate_both(t_list **s1, t_list **s2)
 	return (0);
 }
 
-////
+// ////

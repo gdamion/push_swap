@@ -3,45 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/05 15:13:37 by pcollio-         ###   ########.fr       */
+/*   Updated: 2019/04/06 16:55:30 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/checker.h"
 
+//gcc src/checker/checker.c  src/common/common.c -L. -lft
+
 int main(int argc, char **argv)
 {
-	t_list	*cmds;
-	t_list	*nums;
+	t_lswap	*cmds;
+	t_lswap	*nums;
 	
-	process_stack(&argc, &argv, &nums); //читаем стэк чисел, проверияем на правильность
-	read_instructions(&cmds);
+	nums = (t_lswap*)malloc(sizeof(t_list));
+	cmds = (t_lswap*)malloc(sizeof(t_list));
+	process_stack(&argc, &argv, nums); //читаем стэк чисел, проверияем на правильность
+	read_instructions(cmds);
 	result(cmds, nums);
 	return (0);
 }
 
-/////проверка для входного стэка чисел
-int		process_stack(int *argc, char ***argv, t_list **nums)
+void		process_stack(int *argc, char ***argv,	t_lswap *nums)
 {
 	long long num;
-	t_list	*nums_check;
+	t_lswap	*nums_check;
+	t_lswap *run;
+	int i;
 
+	i = 1;
 	if (*argc < 2)
 		error();
-	(*nums)->prev = NULL; //у первого элемента нет элемента до него (кэп)
-	while (argc > 1)
+	run = nums;
+	run->prev = NULL; //у первого элемента нет элемента до него (кэп)
+	while (i < (*argc))
 	{
-		if ((*nums)->prev != NULL)
+		if (i > 1)
 		{
-			nums_check = *nums; //записываем данный элемент списка в буфер
-			(*nums) = (*nums)->next; //переходим на следующий элемент
-			(*nums)->prev = nums_check; //сохраняем связь с предыдущим элементом
+			nums_check = run; //записываем данный элемент списка в буфер
+			run = run->next; //переходим на следующий элемент
+			run = (t_lswap*)malloc(sizeof(t_list));
+			nums_check->next = run;
+			run->prev = nums_check; //сохраняем связь с предыдущим элементом
 		}
-		nums_check = *nums;
-		num = ft_atoi_ps((*argv)[*argc - 1]);
+		nums_check = run;
+		num = ft_atoi_simple_big((*argv)[i]);
 		if (num < -2147483648 || 2147483647 < num)//проверяем на то, действительно ли число вмещается в int
 			error();
 		while (nums_check->prev != NULL)//пока не дошли до самого конца стека, проверяем на дубликат
@@ -50,13 +59,41 @@ int		process_stack(int *argc, char ***argv, t_list **nums)
 				error();
 			nums_check = nums_check->prev;
 		}
-		(*nums)->num = (int)num; //пишем нужное число
-		argc--;
+		run->num = (int)num; //пишем нужное число
+		i++;
 	}
-	(*nums)->next = NULL; //замыкаем список
-	return (0);
+	run->next = NULL; //замыкаем список
 }
-///////
+
+int	read_instructions(t_lswap *cmds)
+{
+	char *buf;
+	int cmd_type;
+	t_lswap *cmds_buf;
+	t_lswap *run;
+	int i;
+
+	i = 0;
+	buf = NULL;
+	run = cmds;
+	run->prev = NULL;
+	while(get_next_line(1, &buf) != 0)
+	{
+		!(cmd_type = check_intruction(buf)) ? error() : 1;
+		if (i > 0)
+		{
+			cmds_buf = run; //записываем данный элемент списка в буфер
+			run = run->next; //переходим на следующий элемент
+			run = (t_lswap*)malloc(sizeof(t_list));
+			cmds_buf->next = run;
+			run->prev = cmds_buf; //сохраняем связь с предыдущим элементом
+		}
+		run->num = cmd_type; //пишем нужный номер команды
+		i++;
+	}
+	run->next = NULL; //замыкаем список
+	return (cmd_type);
+}
 
 int	check_intruction(const char *cmd)
 {
@@ -77,16 +114,24 @@ int	check_intruction(const char *cmd)
 	return (a);
 }
 
-// Ввели команду, нажали ENTER, гнл считал
-// rd != 0? тогда применяем команду, проверив на правильность, и ждем следующего нажатия ENTER
-// rd == 0? тогда выводим вердикт
-void	read_intructions(t_list **cmds)
+void	result(t_lswap *cmds, t_lswap *nums)
 {
-	while()
-		!(check_intruction()) ? error() : 1;
-}
-
-void	result()
-{
-
+	// ft_printf("\n\n");
+	// while (cmds != NULL)
+	// {
+	// 	ft_printf("%d ", cmds->num);
+	// 	cmds = cmds->next;
+	// }
+	// ft_printf("\n\n");
+	// while (nums != NULL)
+	// {
+	// 	ft_printf("%d ", nums->num);
+	// 	nums = nums->next;
+	// }
+	while (cmds != NULL)
+	{
+		(cmds->num == 1) ?  : 1;
+		
+		cmds = cmds->next;
+	}
 }

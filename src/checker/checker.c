@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/06 16:55:30 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/06 22:44:26 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 int main(int argc, char **argv)
 {
 	t_lswap	*cmds;
-	t_lswap	*nums;
-	
-	nums = (t_lswap*)malloc(sizeof(t_list));
+	t_lswap	*stack_one;
+	t_lswap *stack_two;
+
+	stack_one = (t_lswap*)malloc(sizeof(t_list));
 	cmds = (t_lswap*)malloc(sizeof(t_list));
-	process_stack(&argc, &argv, nums); //читаем стэк чисел, проверияем на правильность
+	process_stack(&argc, &argv, stack_one); //читаем стэк чисел, проверияем на правильность
 	read_instructions(cmds);
-	result(cmds, nums);
+	result(cmds, stack_one, stack_two);
 	return (0);
 }
 
@@ -114,7 +115,7 @@ int	check_intruction(const char *cmd)
 	return (a);
 }
 
-void	result(t_lswap *cmds, t_lswap *nums)
+void	result(t_lswap *cmds, t_lswap *stack_one, t_lswap *stack_two)
 {
 	// ft_printf("\n\n");
 	// while (cmds != NULL)
@@ -130,8 +131,17 @@ void	result(t_lswap *cmds, t_lswap *nums)
 	// }
 	while (cmds != NULL)
 	{
-		(cmds->num == 1) ?  : 1;
-		
+		(cmds->num == 1) ? s_swap() : 1;
+		(cmds->num == 2) ? s_swap() : 1;
+		(cmds->num == 3) ? s_swap_both() : 1;
+		(cmds->num == 4) ? s_push() : 1;
+		(cmds->num == 5) ? s_push() : 1;
+		(cmds->num == 6) ? s_push_both() : 1;
+		(cmds->num == 7) ?  : 1;
+		(cmds->num == 8) ?  : 1;
+		(cmds->num == 9) ?  : 1;
+		(cmds->num == 10) ?  : 1;
+		(cmds->num == 11) ?  : 1;
 		cmds = cmds->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/07 15:20:13 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/07 16:45:14 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,24 +120,25 @@ int			check_intruction(const char *cmd)
 
 void		result(t_lswap *cmds, t_lswap *stack_one, t_lswap *stack_two)
 {
-	t_lswap	*c;
-	t_lswap *stack;
+	// t_lswap	*c;
+	// t_lswap *stack;
 
-	c = cmds;
-	stack = stack_one;
-	ft_printf("\n\n");
-	while (c != NULL)
-	{
-		ft_printf("%d ", c->num);
-		c = c->next;
-	}
-	ft_printf("\n\n");
-	while (stack != NULL)
-	{
-		ft_printf("%d ", stack->num);
-		stack = stack->next;
-	}
-	ft_printf("\n\n");
+	// c = cmds;
+	// stack = stack_one;
+	// ft_printf("\n\nBefore\n");
+	// while (c != NULL)
+	// {
+	// 	ft_printf("%d ", c->num);
+	// 	c = c->next;
+	// }
+	// ft_printf("|\n");
+	// while (stack != NULL)
+	// {
+	// 	ft_printf("%d ", stack->num);
+	// 	stack = stack->next;
+	// }
+	// ft_printf("|\n\n");
+
 	while (cmds != NULL)
 	{
 		(cmds->num == 1) ? s_swap(&stack_one) : 1;
@@ -153,13 +154,30 @@ void		result(t_lswap *cmds, t_lswap *stack_one, t_lswap *stack_two)
 		(cmds->num == 11) ? s_rev_rotate_both(&stack_one, &stack_two) : 1;
 		cmds = cmds->next;
 	}
-	ft_printf("OKI\n");
+
+	// c = stack_two;
+	// stack = stack_one;
+
+	// ft_printf("After\n");
+	//  ft_printf("A ");
+	// while (stack != NULL)
+	// {
+	// 	ft_printf("%d ", stack->num);
+	// 	stack = stack->next;
+	// }
+	//  ft_printf("|\nB ");
+	// while (c != NULL)
+	// {
+	// 	ft_printf("%d ", c->num);
+	// 	c = c->next;
+	// }
+	// ft_printf("|\n\n");
+
 	if (stack_two != NULL)
 		answer(0);
 	while (stack_one->next != NULL)
 	{
-		ft_printf(" A ");
-		if (stack_one->num < stack_one->next->num)
+		if (stack_one->num > stack_one->next->num)
 			answer(0);
 		stack_one = stack_one->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/07 14:44:54 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/07 16:36:34 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	s_swap(t_lswap **s)
 	t_lswap *run;
 	int buf;
 
+	run = *s;
 	if (!run || !run->next)
 		return(0);
 	buf = run->num;
@@ -79,17 +80,20 @@ int	s_push(t_lswap **s1, t_lswap **s2)
 int	s_rotate(t_lswap **s)
 {
 	t_lswap *run;
-	int buf_start;
 	int buf;
+	int buf_start;
 
+	run = *s;
 	if (!run || !run->next)
 		return(0);
+	
 	buf_start = run->num;
 	while(run->next != NULL)
 	{
 		buf = run->num;
 		run->num = run->next->num;
 		run->next->num = buf;
+		run = run->next;
 	}
 	run->num = buf_start;
 	return (1);
@@ -120,6 +124,7 @@ int	s_rev_rotate(t_lswap **s)
 		buf = run->num;
 		run->num = run->prev->num;
 		run->prev->num = buf;
+		run = run->prev;
 	}
 	run->num = buf_finish;
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/07 12:20:49 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/07 15:20:13 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,18 @@ void		process_stack(int *argc, char ***argv,	t_lswap *nums)
 			nums_check->next = run;
 			run->prev = nums_check; //сохраняем связь с предыдущим элементом
 		}
-		nums_check = run;
 		num = ft_atoi_simple_big((*argv)[i]);
 		if (num < -2147483648 || 2147483647 < num)//проверяем на то, действительно ли число вмещается в int
 			error();
-		while (nums_check->prev != NULL)//пока не дошли до самого конца стека, проверяем на дубликат
+		if (i > 1)
 		{
-			if (num == nums_check->num)
-				error();
-			nums_check = nums_check->prev;
+			nums_check = run->prev;
+			while (nums_check->prev != NULL)//пока не дошли до самого конца стека, проверяем на дубликат
+			{
+				if (num == nums_check->num)
+					error();
+				nums_check = nums_check->prev;
+			}
 		}
 		run->num = (int)num; //пишем нужное число
 		i++;
@@ -117,18 +120,24 @@ int			check_intruction(const char *cmd)
 
 void		result(t_lswap *cmds, t_lswap *stack_one, t_lswap *stack_two)
 {
-	// ft_printf("\n\n");
-	// while (cmds != NULL)
-	// {
-	// 	ft_printf("%d ", cmds->num);
-	// 	cmds = cmds->next;
-	// }
-	// ft_printf("\n\n");
-	// while (nums != NULL)
-	// {
-	// 	ft_printf("%d ", nums->num);
-	// 	nums = nums->next;
-	// }
+	t_lswap	*c;
+	t_lswap *stack;
+
+	c = cmds;
+	stack = stack_one;
+	ft_printf("\n\n");
+	while (c != NULL)
+	{
+		ft_printf("%d ", c->num);
+		c = c->next;
+	}
+	ft_printf("\n\n");
+	while (stack != NULL)
+	{
+		ft_printf("%d ", stack->num);
+		stack = stack->next;
+	}
+	ft_printf("\n\n");
 	while (cmds != NULL)
 	{
 		(cmds->num == 1) ? s_swap(&stack_one) : 1;
@@ -144,10 +153,12 @@ void		result(t_lswap *cmds, t_lswap *stack_one, t_lswap *stack_two)
 		(cmds->num == 11) ? s_rev_rotate_both(&stack_one, &stack_two) : 1;
 		cmds = cmds->next;
 	}
+	ft_printf("OKI\n");
 	if (stack_two != NULL)
 		answer(0);
 	while (stack_one->next != NULL)
 	{
+		ft_printf(" A ");
 		if (stack_one->num < stack_one->next->num)
 			answer(0);
 		stack_one = stack_one->next;
@@ -159,4 +170,4 @@ void 		answer(_Bool var)
 {
 	var ? ft_printf("OK\n") : ft_printf("KO\n");
 	exit(0);
-}
+ }

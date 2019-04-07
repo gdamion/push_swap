@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/07 12:59:19 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/07 14:44:54 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ long long ft_atoi_simple_big(char *str)
 
 /////// MAIN OPS ////
 
-int	s_swap(t_lswap **s) //?
+int	s_swap(t_lswap **s)
 {
 	t_lswap *run;
 	int buf;
 
 	if (!run || !run->next)
 		return(0);
-	run = *s;
 	buf = run->num;
 	run->num = run->next->num;
 	run->next->num = buf;
@@ -60,24 +59,20 @@ int	s_swap_both(t_lswap **s1, t_lswap **s2)
 	return (res);
 }
 
-int	s_push(t_lswap **s1, t_lswap **s2)//??
+int	s_push(t_lswap **s1, t_lswap **s2)
 {
-	t_lswap *run1;
-	t_lswap *run2;
 	t_lswap *buf;
 
-	if (!run2)
+	if (!(*s2))
 		return(0);
-	run1 = *s1;
-	run2 = *s2;
-	buf = run2;
-	run2 = run2->next;
-	if (run2 != NULL)
-		run2->prev = NULL;
-	buf->next = run1;
-	if (run1 != NULL)
-		run1->prev = buf;
-	run1 = buf;
+	buf = *s2;
+	*s2 = (*s2)->next;
+	if (*s2 != NULL)
+		(*s2)->prev = NULL;
+	buf->next = *s1;
+	if (*s1 != NULL)
+		(*s1)->prev = buf;
+	*s1 = buf;
 	return (1);
 }
 
@@ -89,9 +84,8 @@ int	s_rotate(t_lswap **s)
 
 	if (!run || !run->next)
 		return(0);
-	run = *s;
 	buf_start = run->num;
-	while(run->next != 0)
+	while(run->next != NULL)
 	{
 		buf = run->num;
 		run->num = run->next->num;
@@ -103,22 +97,40 @@ int	s_rotate(t_lswap **s)
 
 int	s_rotate_both(t_lswap **s1, t_lswap **s2)
 {
-	s_rotate(s1);
-	s_rotate(s2);
-	return (1);
+	int res;
+
+	(!s_rotate(s1) || !s_rotate(s2)) ? (res = 0) : (res = 1);
+	return (res);
 }
 
 int	s_rev_rotate(t_lswap **s)
 {
+	t_lswap *run;
+	int buf_finish;
+	int buf;
 
+	run = *s;
+	if (!run || !run->next)
+		return(0);
+	while (run->next != NULL)
+		run = run->next;
+	buf_finish = run->num;
+	while(run->prev != NULL)
+	{
+		buf = run->num;
+		run->num = run->prev->num;
+		run->prev->num = buf;
+	}
+	run->num = buf_finish;
 	return (1);
 }
 
 int	s_rev_rotate_both(t_lswap **s1, t_lswap **s2)
 {
-	s_rev_rotate(s1);
-	s_rev_rotate(s2);
-	return (1);
+	int res;
+
+	(!s_rev_rotate(s1) || !s_rev_rotate(s2)) ? (res = 0) : (res = 1);
+	return (res);
 }
 
 ///////

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/06 22:44:26 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/07 12:20:49 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //gcc src/checker/checker.c  src/common/common.c -L. -lft
 
-int main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_lswap	*cmds;
 	t_lswap	*stack_one;
@@ -66,7 +66,7 @@ void		process_stack(int *argc, char ***argv,	t_lswap *nums)
 	run->next = NULL; //замыкаем список
 }
 
-int	read_instructions(t_lswap *cmds)
+int			read_instructions(t_lswap *cmds)
 {
 	char *buf;
 	int cmd_type;
@@ -96,7 +96,7 @@ int	read_instructions(t_lswap *cmds)
 	return (cmd_type);
 }
 
-int	check_intruction(const char *cmd)
+int			check_intruction(const char *cmd)
 {
 	int a;
 
@@ -115,7 +115,7 @@ int	check_intruction(const char *cmd)
 	return (a);
 }
 
-void	result(t_lswap *cmds, t_lswap *stack_one, t_lswap *stack_two)
+void		result(t_lswap *cmds, t_lswap *stack_one, t_lswap *stack_two)
 {
 	// ft_printf("\n\n");
 	// while (cmds != NULL)
@@ -131,17 +131,32 @@ void	result(t_lswap *cmds, t_lswap *stack_one, t_lswap *stack_two)
 	// }
 	while (cmds != NULL)
 	{
-		(cmds->num == 1) ? s_swap() : 1;
-		(cmds->num == 2) ? s_swap() : 1;
-		(cmds->num == 3) ? s_swap_both() : 1;
-		(cmds->num == 4) ? s_push() : 1;
-		(cmds->num == 5) ? s_push() : 1;
-		(cmds->num == 6) ? s_push_both() : 1;
-		(cmds->num == 7) ?  : 1;
-		(cmds->num == 8) ?  : 1;
-		(cmds->num == 9) ?  : 1;
-		(cmds->num == 10) ?  : 1;
-		(cmds->num == 11) ?  : 1;
+		(cmds->num == 1) ? s_swap(&stack_one) : 1;
+		(cmds->num == 2) ? s_swap(&stack_two) : 1;
+		(cmds->num == 3) ? s_swap_both(&stack_one, &stack_two) : 1;
+		(cmds->num == 4) ? s_push(&stack_one, &stack_two) : 1;
+		(cmds->num == 5) ? s_push(&stack_two, &stack_one) : 1;
+		(cmds->num == 6) ? s_rotate(&stack_one) : 1;
+		(cmds->num == 7) ? s_rotate(&stack_two) : 1;
+		(cmds->num == 8) ? s_rotate_both(&stack_one, &stack_two) : 1;
+		(cmds->num == 9) ? s_rev_rotate(&stack_one) : 1;
+		(cmds->num == 10) ? s_rev_rotate(&stack_two) : 1;
+		(cmds->num == 11) ? s_rev_rotate_both(&stack_one, &stack_two) : 1;
 		cmds = cmds->next;
 	}
+	if (stack_two != NULL)
+		answer(0);
+	while (stack_one->next != NULL)
+	{
+		if (stack_one->num < stack_one->next->num)
+			answer(0);
+		stack_one = stack_one->next;
+	}
+	answer(1);
+}
+
+void 		answer(_Bool var)
+{
+	var ? ft_printf("OK\n") : ft_printf("KO\n");
+	exit(0);
 }

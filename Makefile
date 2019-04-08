@@ -6,7 +6,7 @@
 #    By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/25 11:58:36 by gdamion-          #+#    #+#              #
-#    Updated: 2019/04/07 17:17:53 by gdamion-         ###   ########.fr        #
+#    Updated: 2019/04/07 17:42:50 by gdamion-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ LIB_DIR = lib/
 HEADER_DIR = includes/
 
 ################ COMMON FILES ##################
-SRC_COM =	common.c
+SRC_COM =	common1.c \
+			common2.c \
+			common3.c
 
 SRC_DIR_COM = src/common/
 ################################################

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/08 10:26:32 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/08 11:13:48 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int			read_instructions(t_lswap *cmds)
 		(i > 0) ? add_next(&cmds) : 1;
 		cmds->num = cmd_type;
 		i++;
+		free(buf);
+		buf = NULL;
 	}
 	cmds->next = NULL;
 	return (cmd_type);

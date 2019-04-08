@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 11:34:59 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/05 15:49:20 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/08 11:11:19 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	gol_ops_one(char **obj, char **tmp)
 {
 	free(*obj);
 	*obj = *tmp;
+	*tmp = NULL;
 }
 
 static void	gol_ops_two(int *i, char **content)

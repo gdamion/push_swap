@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/08 10:34:45 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/08 20:45:40 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ void		result(t_lswap *cmds, t_lswap *stack_one, t_lswap *stack_two)
 {
 	while (cmds != NULL)
 	{
-		(cmds->num == 1) ? s_swap(&stack_one) : 1;
-		(cmds->num == 2) ? s_swap(&stack_two) : 1;
-		(cmds->num == 3) ? s_swap_both(&stack_one, &stack_two) : 1;
-		(cmds->num == 4) ? s_push(&stack_one, &stack_two) : 1;
-		(cmds->num == 5) ? s_push(&stack_two, &stack_one) : 1;
-		(cmds->num == 6) ? s_rotate(&stack_one) : 1;
-		(cmds->num == 7) ? s_rotate(&stack_two) : 1;
-		(cmds->num == 8) ? s_rotate_both(&stack_one, &stack_two) : 1;
-		(cmds->num == 9) ? s_rev_rotate(&stack_one) : 1;
-		(cmds->num == 10) ? s_rev_rotate(&stack_two) : 1;
-		(cmds->num == 11) ? s_rev_rotate_both(&stack_one, &stack_two) : 1;
+		(cmds->num == 1) ? s_swap(&stack_one, 1, 0) : 1;
+		(cmds->num == 2) ? s_swap(&stack_two, 2, 0) : 1;
+		(cmds->num == 3) ? s_swap_both(&stack_one, &stack_two, 0) : 1;
+		(cmds->num == 4) ? s_push(&stack_one, &stack_two, 1, 0) : 1;
+		(cmds->num == 5) ? s_push(&stack_two, &stack_one, 2, 0) : 1;
+		(cmds->num == 6) ? s_rotate(&stack_one, 1, 0) : 1;
+		(cmds->num == 7) ? s_rotate(&stack_two, 2, 0) : 1;
+		(cmds->num == 8) ? s_rotate_both(&stack_one, &stack_two, 0) : 1;
+		(cmds->num == 9) ? s_rev_rotate(&stack_one, 1, 0) : 1;
+		(cmds->num == 10) ? s_rev_rotate(&stack_two, 2, 0) : 1;
+		(cmds->num == 11) ? s_rev_rotate_both(&stack_one, &stack_two, 0) : 1;
 		cmds = cmds->next;
 	}
 	if (stack_two != NULL)

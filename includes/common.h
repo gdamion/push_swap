@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:04:35 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/07 17:57:38 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/08 20:40:48 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void				process_stack(int *argc, char ***argv, t_lswap *nums);
 int					check_intruction(const char *cmd);
 int					read_instructions(t_lswap *cmds);
 
-int					s_swap(t_lswap **s);
-int					s_swap_both(t_lswap **s1, t_lswap **s2);
-int					s_push(t_lswap **s1, t_lswap **s2);
-int					s_rotate(t_lswap **s);
-int					s_rotate_both(t_lswap **s1, t_lswap **s2);
-int					s_rev_rotate(t_lswap **s);
-int					s_rev_rotate_both(t_lswap **s1, t_lswap **s2);
+int					s_swap(t_lswap **s, int stack_n, int mode);
+int					s_swap_both(t_lswap **s1, t_lswap **s2, int mode);
+int					s_push(t_lswap **s1, t_lswap **s2, int stack_n, int mode);
+int					s_rotate(t_lswap **s, int stack_n, int mode);
+int					s_rotate_both(t_lswap **s1, t_lswap **s2, int mode);
+int					s_rev_rotate(t_lswap **s, int stack_n, int mode);
+int					s_rev_rotate_both(t_lswap **s1, t_lswap **s2, int mode);
 
 #endif

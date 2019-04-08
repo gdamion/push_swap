@@ -6,16 +6,18 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 17:29:54 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/07 17:30:07 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/08 20:50:53 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/common.h"
 
-int			s_push(t_lswap **s1, t_lswap **s2)
+int			s_push(t_lswap **s1, t_lswap **s2, int stack_n, int mode)
 {
 	t_lswap *buf;
 
+	if (mode)
+		(stack_n == 1) ? ft_putendl("pa") : ft_putendl("pb");
 	if (!(*s2))
 		return (0);
 	buf = *s2;
@@ -29,12 +31,14 @@ int			s_push(t_lswap **s1, t_lswap **s2)
 	return (1);
 }
 
-int			s_rotate(t_lswap **s)
+int			s_rotate(t_lswap **s, int stack_n, int mode)
 {
 	t_lswap	*run;
 	int		buf;
 	int		buf_start;
 
+	if (mode)
+		(stack_n == 1) ? ft_putendl("ra") : ft_putendl("rb");
 	run = *s;
 	if (!run || !run->next)
 		return (0);
@@ -50,21 +54,24 @@ int			s_rotate(t_lswap **s)
 	return (1);
 }
 
-int			s_rotate_both(t_lswap **s1, t_lswap **s2)
+int			s_rotate_both(t_lswap **s1, t_lswap **s2, int mode)
 {
 	int res;
 
+	mode ? ft_putendl("rr") : 1;
 	res = 1;
-	(!s_rotate(s1) || !s_rotate(s2)) ? (res = 0) : 1;
+	(!s_rotate(s1, 1, 0) || !s_rotate(s2, 2, 0)) ? (res = 0) : 1;
 	return (res);
 }
 
-int			s_rev_rotate(t_lswap **s)
+int			s_rev_rotate(t_lswap **s, int stack_n, int mode)
 {
 	t_lswap	*run;
 	int		buf_finish;
 	int		buf;
 
+	if (mode)
+		(stack_n == 1) ? ft_putendl("rra") : ft_putendl("rrb");
 	run = *s;
 	if (!run || !run->next)
 		return (0);
@@ -82,11 +89,12 @@ int			s_rev_rotate(t_lswap **s)
 	return (1);
 }
 
-int			s_rev_rotate_both(t_lswap **s1, t_lswap **s2)
+int			s_rev_rotate_both(t_lswap **s1, t_lswap **s2, int mode)
 {
 	int res;
 
+	mode ? ft_putendl("rrr") : 1;
 	res = 1;
-	(!s_rev_rotate(s1) || !s_rev_rotate(s2)) ? (res = 0) : 1;
+	(!s_rev_rotate(s1, 1, 0) || !s_rev_rotate(s2, 2, 0)) ? (res = 0) : 1;
 	return (res);
 }

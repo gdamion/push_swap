@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/08 20:45:40 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:31:20 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int			main(int argc, char **argv)
 	t_lswap	*stack_one;
 	t_lswap *stack_two;
 
-	if (!(stack_one = (t_lswap*)malloc(sizeof(t_list)))
-		|| !(cmds = (t_lswap*)malloc(sizeof(t_list))))
+	if (!(stack_one = (t_lswap*)malloc(sizeof(t_lswap)))
+		|| !(cmds = (t_lswap*)malloc(sizeof(t_lswap))))
 		error();
 	process_stack(&argc, &argv, stack_one);
 	read_instructions(cmds);

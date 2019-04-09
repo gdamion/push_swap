@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/09 15:20:00 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:03:18 by pcollio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		add_next(t_lswap **curr)
 	t_lswap *buf;
 
 	buf = *curr;
-	if (!((*curr)->next = (t_lswap*)malloc(sizeof(t_list))))
+	if (!((*curr)->next = (t_lswap*)malloc(sizeof(t_lswap))))
 		error();
 	*curr = (*curr)->next;
 	(*curr)->prev = buf;

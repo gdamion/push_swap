@@ -6,11 +6,12 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/08 11:13:48 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/09 15:20:00 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/common.h"
+#include <stdio.h>
 
 void		process_stack(int *argc, char ***argv, t_lswap *nums)
 {
@@ -23,15 +24,17 @@ void		process_stack(int *argc, char ***argv, t_lswap *nums)
 	nums->prev = NULL;
 	while (i < (*argc))
 	{
-		(i > 1) ? add_next(&nums) : 1;
 		num = ft_atoi_simple_big((*argv)[i]);
-		(num < -2147483648 || 2147483647 < num) ? error() : 1;
+		if (num < -2147483648 || 2147483647 < num)
+			error();
 		if (i > 1)
 		{
+			add_next(&nums);
 			nums_check = nums->prev;
 			while (nums_check->prev != NULL)
 			{
-				(num == nums_check->num) ? error() : 1;
+				if (num == nums_check->num)
+					error();
 				nums_check = nums_check->prev;
 			}
 		}
@@ -69,10 +72,9 @@ void		add_next(t_lswap **curr)
 	t_lswap *buf;
 
 	buf = *curr;
-	*curr = (*curr)->next;
-	if (!(*curr = (t_lswap*)malloc(sizeof(t_list))))
+	if (!((*curr)->next = (t_lswap*)malloc(sizeof(t_list))))
 		error();
-	buf->next = *curr;
+	*curr = (*curr)->next;
 	(*curr)->prev = buf;
 }
 

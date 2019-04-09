@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:41 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/09 15:30:40 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/09 18:02:18 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	magic(t_lswap *stack_one, t_lswap *stack_two, int len)
 	t_lswap *stack;
 	int min;
 	int max;
-int i = 0;
-	// printf("%d\n", i++);
+
 	stack = stack_one; //ищем макс и мин
 	min = stack->num;
 	max = stack->num;
@@ -42,15 +41,16 @@ int i = 0;
 		(max < stack->num) ? (max = stack->num) : 1;
 		stack = stack->next;
 	}
-	// printf("%d\n", i++);
-	// while(len > 3) //перекидываем все, кроме 3 значений, в Б
-	// {
-	// 	if (stack_one->num != min && stack_one->num != max)
-	// 		s_push(&stack_two, &stack_one, 2, 1);
-	// 	else
-	// 		s_rotate(&stack_one, 1, 1);
-	// }
-	// printf("%d\n", i++);
+	while(len > 3) //перекидываем все, кроме 3 значений, в Б
+	{
+		if (stack_one->num != min && stack_one->num != max)
+		{
+			s_push(&stack_two, &stack_one, 2, 1);
+			len--;
+		}
+		else
+			s_rotate(&stack_one, 1, 1);
+	}
 	if (stack_one->num == max) //сортируем оставшиеся 3 символа в А
 		s_rotate(&stack_one, 1, 1);
 	else if (stack_one->num != min && stack_one->next->num == min)
@@ -62,7 +62,6 @@ int i = 0;
 	}
 	else
 		s_rev_rotate(&stack_one, 1, 1);
-	// printf("%d\n", i++);
 //////////////////////////////////////////////////
 	int len_a;
 	int len_b;
@@ -72,28 +71,25 @@ int i = 0;
 	int pos1;
 	int pos2;
 	int buf;
-	// printf("%d\n", i++);
-	//	считаем длину А
-	len_a = 3;
 
-	//	считаем длину Б
-	s2 = stack_two;
+	len_a = 3;//считаем длину А
+	s2 = stack_two;//считаем длину Б
 	len_b = 0;
 	while (s2 != NULL)
 	{
-		len++;
+		len_b++;
 		s2 = s2->next;
 	}
-	// printf("%d\n", i++);
 	s2 = stack_two;
-	//ЦИКЛ
+	printf("1\n");
 	while (len_b > 0)
 	{
+			printf("2\n");
 		pos1 = 0;
 		pos2 = 0;
-	//	ЦИКЛ
 		while (s2 != NULL) //для каждого элемента в Б (записываем результаты в структуру этого элемента - сумма шагов, навправление А, направление Б):
 		{
+				printf("3\n");
 			buf = s2->num;
 			//	1) считаем количество шагов в Б, направление (ниже середины или выше)
 			(pos2 > len_b / 2) ? (s2->vec2 = -1, s2->step2 = len_b - pos2) : (s2->vec2 = 1, s2->step2 = pos2);
@@ -115,7 +111,7 @@ int i = 0;
 			s2 = s2->next;
 			pos2++;
 		}
-		// printf("%d\n", i++);
+	printf("4\n");
 		s2 = stack_two;
 		opt = s2;
 		// ЦИКЛ
@@ -125,7 +121,7 @@ int i = 0;
 				opt = s2;
 			s2 = s2->next;
 		}
-	// printf("%d\n", i++);
+		printf("5\n");
 		//	для этого элемента выполняем операции, выводя на экран
 		while (opt->step1 != 0 && opt->step2 != 0)
 		{
@@ -141,15 +137,15 @@ int i = 0;
 				s_rev_rotate(&stack_two, 2, 1);
 			else if (opt->step2 != 0 && opt->vec2 == 1)
 				s_rotate(&stack_two, 2, 1);
+				printf("6\n");
 		}
 		s_push(&stack_one, &stack_two, 1, 1);
-	// printf("%d\n", i++);
 	//	считаем длину А
 		len_a++;
 	//	считаем длину Б
 		len_b--;
+		printf("7\n");
 	}//	проверяем, пуст ли Б ( len_Б - 1 == 0), если пуст, то выходим из цикла
-	// printf("%d\n", i++);
 	s1 = stack_one;
 	buf = 0;
 	while (s1->num != min)//ищем мин
@@ -157,7 +153,6 @@ int i = 0;
 		s1 = s1->next;
 		buf++;
 	}
-	// printf("%d\n", i++);
 //теперь крутим А, пока на первой позиции не окажется МИН
 	if (buf > len_a / 2)
 		while (stack_one->num != min)
@@ -165,7 +160,7 @@ int i = 0;
 	else
 		while (stack_one->num != min) //теперь крутим А, пока на первой позиции не окажется МИН
 			s_rotate(&stack_one, 1, 1);
-		// printf("%d\n", i++);
+
 //////////////////////////////////////////////////////
 	ft_printf("\n\n");
 	ft_printf("After\n");

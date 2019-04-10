@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:04:35 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/09 15:27:35 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/10 10:52:52 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 typedef struct		s_lswap
 {
 	int				num;
-	struct s_lswap	*next;
-	struct s_lswap	*prev;
 	int				step1;
 	int				step2;
-	int				vec1;
-	int				vec2;
+	char			vec1;
+	char			vec2;
+
+	struct s_lswap	*next;
+	struct s_lswap	*prev;
 }					t_lswap;
 
 void				error();

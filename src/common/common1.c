@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/09 19:03:18 by pcollio-         ###   ########.fr       */
+/*   Updated: 2019/04/10 10:57:32 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		process_stack(int *argc, char ***argv, t_lswap *nums)
 	i = 1;
 	(*argc < 2) ? error() : 1;
 	nums->prev = NULL;
+	nums->next = NULL;
 	while (i < (*argc))
 	{
 		num = ft_atoi_simple_big((*argv)[i]);
@@ -76,6 +77,13 @@ void		add_next(t_lswap **curr)
 		error();
 	*curr = (*curr)->next;
 	(*curr)->prev = buf;
+	
+	(*curr)->next = NULL;
+	(*curr)->num = 0;
+	(*curr)->step1 = 0;
+	(*curr)->step2 = 0;
+	(*curr)->vec1 = 0;
+	(*curr)->vec2 = 0;
 }
 
 int			check_intruction(const char *cmd)

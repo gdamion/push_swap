@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/10 10:57:32 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/10 14:41:21 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void		add_next(t_lswap **curr)
 		error();
 	*curr = (*curr)->next;
 	(*curr)->prev = buf;
-	
 	(*curr)->next = NULL;
 	(*curr)->num = 0;
 	(*curr)->step1 = 0;

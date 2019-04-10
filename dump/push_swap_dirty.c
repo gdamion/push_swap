@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_dirty.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:41 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/10 16:16:49 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/10 16:15:39 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	magic(t_lswap *stack_one, t_lswap *stack_two, int len)
 	min = drop_to_b(&stack_one, &stack_two, len); //перебрасываем в Б кроме 3 и сортируем оставшееся
 	len_a = lst_len(stack_one);
 	len_b = lst_len(stack_two);
-	// print_stacks(stack_one, stack_two);//
+	print_stacks(stack_one, stack_two);//
 	while (len_b > 0)
 	{
 		// ft_printf("\n--------------------\n");
@@ -52,7 +52,7 @@ void	magic(t_lswap *stack_one, t_lswap *stack_two, int len)
 		// ft_printf("\n--------------------\n");
 	}
 	final_moves(&stack_one, min, len_a);
-	// print_stacks(stack_one, stack_two);//
+	print_stacks(stack_one, stack_two);//
 	exit(0);
 }
 
@@ -122,9 +122,9 @@ void	predict_all(t_lswap *s1, t_lswap *s2, int len_a, int len_b)
 			step2 = pos2;
 		}
 		s2->step2 = pos2;
-		// printf("----\npos B = %d\n", pos2);
-		// printf("steps B = %d\n", s2->step2);
-		// printf("vec B = %d\n\n", s2->vec2);
+		printf("----\npos B = %d\n", pos2);
+		printf("steps B = %d\n", s2->step2);
+		printf("vec B = %d\n\n", s2->vec2);
 		//	2) ищем место для помещения в А, считаем количесвто шагов, направление (ниже середины или выше)
 		predict_in_a(s1, s2, buf, len_a);
 		// printf("\npos A fin = %d\n", pos1);
@@ -167,9 +167,9 @@ void	predict_in_a(t_lswap *s1, t_lswap *s2, int buf, int len_a)
 				step1 = pos1;
 				s2->step1 = step1;
 			}
-			// ft_printf("pos A = %d\n", pos1);
-			// ft_printf("step A = %d\n", s2->step1);
-			// ft_printf("vec A = %d\n----\n\n", s2->vec1);
+			ft_printf("pos A = %d\n", pos1);
+			ft_printf("step A = %d\n", s2->step1);
+			ft_printf("vec A = %d\n----\n\n", s2->vec1);
 			break ;
 		}
 		prev = s1->num;
@@ -188,8 +188,8 @@ void	find_best(t_lswap **opt, t_lswap *s2)
 			*opt = s2;
 		s2 = s2->next;
 	}
-	// ft_printf("opt num = %d\nsteps A = %d, vector A = %hd\nsteps B = %d, vector B = %hd\n",
-				// (*opt)->num, (*opt)->step1, (*opt)->vec1, (*opt)->step2, (*opt)->vec2);
+	ft_printf("opt num = %d\nsteps A = %d, vector A = %hd\nsteps B = %d, vector B = %hd\n",
+				(*opt)->num, (*opt)->step1, (*opt)->vec1, (*opt)->step2, (*opt)->vec2);
 }
 
 void	exec(t_lswap **stack_one, t_lswap **stack_two, t_lswap *opt)

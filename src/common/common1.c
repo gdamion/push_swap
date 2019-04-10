@@ -6,12 +6,11 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/10 14:41:21 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/10 16:18:49 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/common.h"
-#include <stdio.h>
 
 void		process_stack(int *argc, char ***argv, t_lswap *nums)
 {

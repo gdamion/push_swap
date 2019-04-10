@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:41 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/10 11:07:11 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/10 12:04:42 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,18 @@ int		main(int argc, char **argv)
 	printf("%lu\n", sizeof(stack_one->vec2));
 	printf("%lu\n", sizeof(stack_one->next));
 	printf("%lu\n", sizeof(stack_one->prev));
-	printf("Total = %lu\n\n", sizeof(*stack_one));
+	printf("Total = %lu\n", sizeof(*stack_one));
+	printf("Total required = %lu\n\n", sizeof(t_lswap));
 	
 	process_stack(&argc, &argv, stack_one);
 
 t_lswap *test = stack_one;
 	while (test)
 	{
-		printf("%d, %d, %d, %d, %d\n\n", test->num, test->step1, test->step2, test->vec1, test->vec2);
+		printf("%d, %d, %d, %d, %d\n", test->num, test->step1, test->step2, test->vec1, test->vec2);
 		test = test->next;
 	}
-
+	printf("\n\n");
 	magic(stack_one, stack_two, argc - 1);
 	// result(stack_one, stack_two);
 	return (0);
@@ -128,7 +129,6 @@ void	magic(t_lswap *stack_one, t_lswap *stack_two, int len)
 		s2 = s2->next;
 	}
 	s2 = stack_two;
-	printf("\n\n");
 
 	t_lswap *test1 = stack_one;
 	while (test1)
@@ -144,154 +144,155 @@ void	magic(t_lswap *stack_one, t_lswap *stack_two, int len)
 		test2 = test2->next;
 	}
 printf("\n\n");
-
+int step2;
 	while (len_b > 0)
 	{
 //		printf("2\n");
-		pos1 = 0;
-		pos2 = 0;
+		
 		//printf("len A = %d\n", len_a);
 		//printf("len B = %d\n\n", len_b);
+		int step1;
+		pos2 = 0;
 		while (s2 != NULL) //для каждого элемента в Б (записываем результаты в структуру этого элемента - сумма шагов, навправление А, направление Б):
 		{
+			pos1 = 0;
 //			printf("3\n");
 			buf = s2->num;
 			//	1) считаем количество шагов в Б, направление (ниже середины или выше)
 			if (pos2 > len_b / 2)
 			{
-				printf("Var 1\n");
+				// printf("Var 1\n");
 				s2->vec2 = -1;
-					printf("pos B = %d\n", pos2);
-				printf("len B = %d\n\n", len_b);
+				// printf("pos B = %d\n", pos2);
+				// printf("len B = %d\n\n", len_b);
 				int step2 = len_b - pos2;
 				s2->step2 = step2;
-				printf("steps B = %d\n\n", step2);
+				// printf("steps B int = %d\n", step2);
 			}
 			else
 			{
-				printf("Var 2\n");
+				// printf("Var 2\n");
 				s2->vec2 = 1;
-					printf("pos B = %d\n", pos2);
-				printf("len B = %d\n", len_b);
+				// printf("pos B = %d\n", pos2);
+				// printf("len B = %d\n\n", len_b);
+				int step2 = pos2;
 				s2->step2 = pos2;
-				printf("steps B = %d\n\n", opt->step2);
+				// printf("steps B int = %d\n", step2);
 			}
+			// printf("steps B = %d\n\n", s2->step2);
 			
 				
 			//	2) ищем место для помещения в А, считаем количесвто шагов, направление (ниже середины или выше)
-			// s1 = stack_one;
-			// while (s1 != NULL)
-			// {
-			// 	printf("\npos A = %d\n", pos1);
-			// 	if (s1-> num > buf)
-			// 	{
-			// 		(pos1 > len_a / 2) ? (s2->vec1 = -1, s2->step1 = len_a - pos1) : (s2->vec1 = 1, s2->step1 = pos1);
-			// 		printf("steps A = %d\n\n", opt->step1);
-			// 		break ;
-			// 	}
-			// 	else
-			// 	{
-			// 		s1 = s1->next;
-			// 		pos1++;
-			// 	}
-			// }
+			s1 = stack_one;
+		//	ft_printf("pos A Start = %d\n", pos1);
+			while (s1 != NULL)
+			{
+				//ft_printf("len A = %d\n", len_a);
+				if (s1->num > buf)
+				{
+					if (pos1 > len_a / 2)
+					{
+						//printf("Var 1\n");
+						s2->vec1 = -1;
+						step1 = len_a - pos1;
+						s2->step1 = step1;
+					}
+					else
+					{
+						//printf("Var 2\n");
+						s2->vec1 = 1;
+						step1 = pos1;
+						s2->step1 = step1;
+					}
+					break ;
+				}
+				else
+				{
+					s1 = s1->next;
+					pos1++;
+				//	ft_printf("pos A = %d\n", pos1);
+				}
+			}
+			// printf("\npos A fin = %d\n", pos1);
+			// printf("steps A = %d\n\n", step1);
 			s2 = s2->next;
 			pos2++;
-			printf("\n");
+			// printf("\n");
 		}
-////
-	// s1 = stack_one;
-	// s2 = stack_two;
-
-	// ft_printf("\n\n");
-	// ft_printf("Sorted A\n");
-	//  ft_printf("A ");
-	// while (s1 != NULL)
-	// {
-	// 	ft_printf("%d ", s1->num);
-	// 	s1 = s1->next;
-	// }
-	//  ft_printf("|\nB ");
-	// while (s2 != NULL)
-	// {
-	// 	ft_printf("%d ", s2->num);
-	// 	s2 = s2->next;
-	// }
-	// ft_printf("|\n\n");
-	// /////////
-	// //printf("4\n");
-	// 	s2 = stack_two;
-	// 	opt = s2;
-	// 	printf("opt num before = %d\n", opt->num);
-	// 	while (s2 != NULL) //сравниваем сумму шагов, запоминаем элемент с самым малым количесвом
-	// 	{
-	// 		printf("%d %d\n", opt->step1 + opt->step2, s2->step1 + s2->step2);
-	// 		if ((opt->step1 + opt->step2) > (s2->step1 + s2->step2))
-	// 			opt = s2;
-	// 		s2 = s2->next;
-	// 	}
-	// 	printf("opt num = %d\n", opt->num);
-	// 	//	для этого элемента выполняем операции, выводя на экран
-	// 	while (opt->step1 != 0 && opt->step2 != 0)
-	// 	{
-	// 		if (opt->step1 != 0 && opt->step2 != 0 && opt->vec1 == 1 && opt->vec2 == 1)
-	// 		{
-	// 			s_rotate_both(&stack_one, &stack_two, 1);
-	// 			(opt->step1--, opt->step2--);
-	// 		}
-	// 		else if (opt->step1 != 0 && opt->step2 != 0 && opt->vec1 == -1 && opt->vec2 == -1)
-	// 		{
-	// 			s_rev_rotate_both(&stack_one, &stack_two, 1);
-	// 			(opt->step1--, opt->step2--);
-	// 		}
-	// 		else if (opt->step1 != 0 && opt->vec1 == -1)
-	// 		{
-	// 			s_rev_rotate(&stack_one, 1, 1);
-	// 			opt->step1--;
-	// 		}
-	// 		else if (opt->step1 != 0 && opt->vec1 == 1)
-	// 		{
-	// 			s_rotate(&stack_one, 1, 1);
-	// 			opt->step1--;
-	// 		}
-	// 		else if (opt->step2 != 0 && opt->vec2 == -1)
-	// 		{
-	// 			s_rev_rotate(&stack_two, 2, 1);
-	// 			opt->step2--;
-	// 		}
-	// 		else if (opt->step2 != 0 && opt->vec2 == 1)
-	// 		{
-	// 			s_rotate(&stack_two, 2, 1);
-	// 			opt->step2--;
-	// 		}
-	// 		printf("again\n");
-	// 	}
-	// 	s_push(&stack_one, &stack_two, 1, 1);
-	// //	считаем длину А
-	// 	len_a++;
-	// //	считаем длину Б
-	// 	len_b--;
-	// 	//printf("7\n");
+//////////////////////////////////////////////////////////CLEAN (MAYBE)
+	//printf("4\n");
+		s2 = stack_two;
+		opt = s2;
+		//printf("opt num before = %d\n", opt->num);
+		while (s2 != NULL) //сравниваем сумму шагов, запоминаем элемент с самым малым количесвом
+		{
+			//printf("%d %d\n", opt->step1 + opt->step2, s2->step1 + s2->step2);
+			if ((opt->step1 + opt->step2) > (s2->step1 + s2->step2))
+				opt = s2;
+			s2 = s2->next;
+		}
+		printf("opt num = %d\n", opt->num);
+		//	для этого элемента выполняем операции, выводя на экран
+		while (opt->step1 != 0 && opt->step2 != 0)
+		{
+			if (opt->step1 != 0 && opt->step2 != 0 && opt->vec1 == 1 && opt->vec2 == 1)
+			{
+				s_rotate_both(&stack_one, &stack_two, 1);
+				(opt->step1--, opt->step2--);
+			}
+			else if (opt->step1 != 0 && opt->step2 != 0 && opt->vec1 == -1 && opt->vec2 == -1)
+			{
+				s_rev_rotate_both(&stack_one, &stack_two, 1);
+				(opt->step1--, opt->step2--);
+			}
+			else if (opt->step1 != 0 && opt->vec1 == -1)
+			{
+				s_rev_rotate(&stack_one, 1, 1);
+				opt->step1--;
+			}
+			else if (opt->step1 != 0 && opt->vec1 == 1)
+			{
+				s_rotate(&stack_one, 1, 1);
+				opt->step1--;
+			}
+			else if (opt->step2 != 0 && opt->vec2 == -1)
+			{
+				s_rev_rotate(&stack_two, 2, 1);
+				opt->step2--;
+			}
+			else if (opt->step2 != 0 && opt->vec2 == 1)
+			{
+				s_rotate(&stack_two, 2, 1);
+				opt->step2--;
+			}
+			printf("again\n");
+		}
+		s_push(&stack_one, &stack_two, 1, 1);
+	//	считаем длину А
+		len_a++;
+	//	считаем длину Б
+		len_b--;
+		//printf("7\n");
 	break;
 	}//	проверяем, пуст ли Б ( len_Б - 1 == 0), если пуст, то выходим из цикла
-	// s1 = stack_one;
-	// s2 = stack_two;
+	s1 = stack_one;
+	s2 = stack_two;
 
-	// ft_printf("\n\n");
-	// ft_printf("After1\n");
-	//  ft_printf("A ");
-	// while (s1 != NULL)
-	// {
-	// 	ft_printf("%d ", s1->num);
-	// 	s1 = s1->next;
-	// }
-	//  ft_printf("|\nB ");
-	// while (s2 != NULL)
-	// {
-	// 	ft_printf("%d ", s2->num);
-	// 	s2 = s2->next;
-	// }
-	// ft_printf("|\n\n");
+	ft_printf("\n\n");
+	ft_printf("After 1st sort\n");
+	 ft_printf("A ");
+	while (s1 != NULL)
+	{
+		ft_printf("%d ", s1->num);
+		s1 = s1->next;
+	}
+	 ft_printf("|\nB ");
+	while (s2 != NULL)
+	{
+		ft_printf("%d ", s2->num);
+		s2 = s2->next;
+	}
+	ft_printf("|\n\n");
 ///////////
 // 	printf("71\n");
 // 	s1 = stack_one;

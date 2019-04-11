@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/10 16:18:49 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/11 18:22:21 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			read_instructions(t_lswap *cmds)
 	i = 0;
 	buf = NULL;
 	cmds->prev = NULL;
-	while (get_next_line(1, &buf) != 0)
+	while (get_next_line(0, &buf) != 0)
 	{
 		!(cmd_type = check_intruction(buf)) ? error() : 1;
 		(i > 0) ? add_next(&cmds) : 1;

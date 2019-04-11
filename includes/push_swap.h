@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:52 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/10 15:41:20 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/11 10:12:50 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	exec(t_lswap **stack_one, t_lswap **stack_two, t_lswap *opt);
 void	final_moves(t_lswap **s1, int min, int len_a);
 int		lst_len(t_lswap	*lst);
 void	el_zerofill(t_lswap *el);
+int		ordered(t_lswap	*s, int len);
 
 #endif

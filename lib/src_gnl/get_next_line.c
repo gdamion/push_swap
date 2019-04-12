@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 11:34:59 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/12 18:01:55 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/12 19:20:18 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,20 @@ int			get_next_line3(int fd, char **line)
 	while (files)
 	{
 		if (files->fd == fd)
+			break ;
+		else if (!files->next)
 		{
 
+			if (!(files->next = (t_files*)malloc(sizeof(t_files))))
+				return (-1);
+			files = files->next;
+			files->fd = fd;
+			files->next = NULL;
+			break ;
 		}
 		files = files->next;
 	}
+	return (get_one_line(line, fd, &files->content, &files->endl));
 }
 
 ////////////////////////////////////////////////////

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/12 14:31:24 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/12 17:37:28 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 int			main(int argc, char **argv)
 {
+	//ft_putendl("\nTIME FOR CHECKER BITCH\n");
+	//ft_printf("args ps = %d\n", argc - 1);
 	t_lswap	*cmds;
 	t_lswap	*stack_one;
 	t_lswap *stack_two;
 
 	if (!(stack_one = (t_lswap*)malloc(sizeof(t_lswap)))
 		|| !(cmds = (t_lswap*)malloc(sizeof(t_lswap))))
-		error();
-	if (argc > 1)
 	{
-		process_stack(&argc, &argv, stack_one);
-		read_instructions(cmds);
-		result(cmds, stack_one, stack_two);
+		ft_putendl("Alloc error");
+		error();
 	}
+	process_stack(&argc, &argv, stack_one);
+	read_instructions(cmds);
+	result(cmds, stack_one, stack_two);
 	return (0);
 }
 

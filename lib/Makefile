@@ -6,7 +6,7 @@
 #    By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/29 14:13:15 by gdamion-          #+#    #+#              #
-#    Updated: 2019/04/05 15:41:02 by gdamion-         ###   ########.fr        #
+#    Updated: 2019/04/12 17:06:21 by gdamion-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ SRC =	ft_memset.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		ft_is_inf.c \
-		ft_is_nan.c
+		ft_is_nan.c \
+		ft_strndup.c
 
 SRC_DIR = src/
 ########################################################

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   common3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcollio- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 17:37:14 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/09 18:29:45 by pcollio-         ###   ########.fr       */
+/*   Updated: 2019/04/12 15:45:25 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ long long	ft_atoi_simple_big(char *str)
 	while (*str != '\0')
 	{
 		if (*str < '0' || '9' < *str)
+		{
+			ft_putendl("Arg is not a number");
 			error();
+		}
 		res = res * 10 + (int)(*str) - 48;
 		str++;
 	}

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/11 18:22:21 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/12 17:35:01 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,46 @@ void		process_stack(int *argc, char ***argv, t_lswap *nums)
 {
 	long long	num;
 	t_lswap		*nums_check;
+	int			args;
 	int			i;
+	char		**curr_arg;
 
-	i = 1;
-	(*argc < 2) ? error() : 1;
+	args = 1;//?
+	i = 0;//?
 	nums->prev = NULL;
 	nums->next = NULL;
-	while (i < (*argc))
+	while (args < (*argc))
 	{
-		num = ft_atoi_simple_big((*argv)[i]);
-		if (num < -2147483648 || 2147483647 < num)
-			error();
-		if (i > 1)
+		curr_arg = ft_strsplit((*argv)[args], ' ');
+		while (*curr_arg != NULL)
 		{
-			add_next(&nums);
-			nums_check = nums->prev;
-			while (nums_check->prev != NULL)
+			num = ft_atoi_simple_big(*curr_arg);//?
+			if (num < -2147483648 || 2147483647 < num)
 			{
-				if (num == nums_check->num)
-					error();
-				nums_check = nums_check->prev;
+				ft_putendl("Not int");
+				error();
 			}
+			if (i > 0)//?
+			{
+				add_next(&nums);
+				nums_check = nums->prev;
+				while (nums_check->prev != NULL)
+				{
+					if (num == nums_check->num)
+					{
+						ft_putendl("Duplicate");
+						error();
+					}
+					nums_check = nums_check->prev;
+				}
+			}
+			nums->num = (int)num;
+			i++;//?
+		//	free(*curr_arg);
+			curr_arg++;
 		}
-		nums->num = (int)num;
-		i++;
+		args++;
+		//free(curr_arg);
 	}
 	nums->next = NULL;
 }
@@ -54,9 +70,13 @@ int			read_instructions(t_lswap *cmds)
 	i = 0;
 	buf = NULL;
 	cmds->prev = NULL;
-	while (get_next_line(0, &buf) != 0)
+	while (get_next_line2(0, &buf) != 0)
 	{
-		!(cmd_type = check_intruction(buf)) ? error() : 1;
+		if (!(cmd_type = check_intruction(buf)))
+		{
+			ft_putendl("Wrong command");
+			error();
+		}
 		(i > 0) ? add_next(&cmds) : 1;
 		cmds->num = cmd_type;
 		i++;
@@ -73,7 +93,10 @@ void		add_next(t_lswap **curr)
 
 	buf = *curr;
 	if (!((*curr)->next = (t_lswap*)malloc(sizeof(t_lswap))))
+	{
+		ft_putendl("Add new el error");
 		error();
+	}
 	*curr = (*curr)->next;
 	(*curr)->prev = buf;
 	(*curr)->next = NULL;
@@ -100,5 +123,7 @@ int			check_intruction(const char *cmd)
 	!ft_strcmp(cmd, "rra") ? (a = 9) : 1;
 	!ft_strcmp(cmd, "rrb") ? (a = 10) : 1;
 	!ft_strcmp(cmd, "rrr") ? (a = 11) : 1;
+	if(!a)
+		ft_printf("Comand is: %s|\n", cmd);
 	return (a);
 }

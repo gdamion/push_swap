@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:41 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/12 13:52:20 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/12 17:13:24 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int		main(int argc, char **argv)
 	t_lswap *stack_two;
 
 	if (!(stack_one = (t_lswap*)malloc(sizeof(t_lswap))))
+	{
+		ft_putendl("Alloc error");
 		error();
+	}
+	//ft_printf("args ps = %d\n", argc - 1);
 	el_zerofill(stack_one);
 	process_stack(&argc, &argv, stack_one);
 	if (!ordered(stack_one, argc - 1))

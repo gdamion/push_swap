@@ -6,7 +6,7 @@
 #    By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/25 11:58:36 by gdamion-          #+#    #+#              #
-#    Updated: 2019/04/09 15:22:28 by gdamion-         ###   ########.fr        #
+#    Updated: 2019/04/12 17:47:50 by gdamion-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,8 +65,8 @@ $(OBJ_DIR_P)%.o: $(SRC_DIR_P)%.c
 
 $(NAME): $(addprefix $(OBJ_DIR_COM),$(OBJ_COM)) $(addprefix $(OBJ_DIR_C),$(OBJ_C)) $(addprefix $(OBJ_DIR_P),$(OBJ_P))
 	@make -C $(LIB_DIR)
-	@gcc $(addprefix $(OBJ_DIR_COM),$(OBJ_COM)) $(addprefix $(OBJ_DIR_C),$(OBJ_C)) -L/Users/gdamion-/push_swap/lib -lft -o $(NAME_C)
-	@gcc $(addprefix $(OBJ_DIR_COM),$(OBJ_COM)) $(addprefix $(OBJ_DIR_P),$(OBJ_P)) -L/Users/gdamion-/push_swap/lib -lft -o $(NAME_P)
+	@gcc $(addprefix $(OBJ_DIR_COM),$(OBJ_COM)) $(addprefix $(OBJ_DIR_C),$(OBJ_C)) -L. lib/libft.a -o $(NAME_C)
+	@gcc $(addprefix $(OBJ_DIR_COM),$(OBJ_COM)) $(addprefix $(OBJ_DIR_P),$(OBJ_P)) -L. lib/libft.a -o $(NAME_P)
 
 clean:
 	@make clean -C $(LIB_DIR)

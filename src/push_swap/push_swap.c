@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:41 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/11 18:33:33 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:52:20 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	magic(t_lswap *stack_one, t_lswap *stack_two, int len)
 		// ft_printf("\n--------------------\n");
 	}
 	final_moves(&stack_one, min, len_a);
-	 print_stacks(stack_one, stack_two);//
+	// print_stacks(stack_one, stack_two);//
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/12 17:35:01 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/13 11:05:07 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ int			read_instructions(t_lswap *cmds)
 	i = 0;
 	buf = NULL;
 	cmds->prev = NULL;
-	while (get_next_line2(0, &buf) != 0)
+	while (get_next_line(0, &buf) != 0)
 	{
+		//ft_printf("gnl output: %s|\n", buf);
 		if (!(cmd_type = check_intruction(buf)))
 		{
 			ft_putendl("Wrong command");

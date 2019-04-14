@@ -4,10 +4,16 @@ LIMIT=700
 FILE=problem_100
 SUM=0
 
-for i in {1..100}
+for i in {1..200}
 do
-		export ARG=`ruby -e "puts (1..50).to_a.shuffle.join(' ')"`
-		if ./push_swap $ARG | ./checker $ARG | grep -q KO
+		export ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
+		if ./push_swap $ARG | ./checker $ARG | grep -q KO #-o ./push_swap $ARG | ./checker $ARG | grep -q Error
+		then
+			echo "Error!"
+			echo $ARG
+			break
+		fi
+		if ./push_swap $ARG | ./checker $ARG | grep -q Error
 		then
 			echo "Error!"
 			echo $ARG

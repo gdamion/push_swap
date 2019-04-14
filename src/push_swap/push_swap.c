@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:41 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/12 17:13:24 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/14 21:00:47 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		main(int argc, char **argv)
 {
 	t_lswap	*stack_one;
 	t_lswap *stack_two;
+	int		flag;
 
 	if (!(stack_one = (t_lswap*)malloc(sizeof(t_lswap))))
 	{
@@ -24,13 +25,15 @@ int		main(int argc, char **argv)
 	}
 	//ft_printf("args ps = %d\n", argc - 1);
 	el_zerofill(stack_one);
-	process_stack(&argc, &argv, stack_one);
-	if (!ordered(stack_one, argc - 1))
-		magic(stack_one, stack_two, argc - 1);
+	flag = process_stack(&argc, &argv, stack_one);
+	if (flag)
+		print_stacks(stack_one, NULL)
+	if (!ordered(stack_one, argc - 1, flag))
+		magic(stack_one, stack_two, argc - 1, flag);
 	return (0);
 }
 
-int		ordered(t_lswap	*s, int len)
+int		ordered(t_lswap	*s, int len, int flag)
 {
 	int		buf;
 	t_lswap	*lbuf;
@@ -72,7 +75,7 @@ int		ordered(t_lswap	*s, int len)
 			while (s->num != min)
 				s_rotate(&s, 1, 1);
 	}
-	// print_stacks(s, NULL);
+	flag ? print_stacks(s, NULL): 1;
 	return (1);
 }
 
@@ -82,7 +85,7 @@ void	magic(t_lswap *stack_one, t_lswap *stack_two, int len)
 	int len_b;
 	t_lswap *opt;
 	int min;
-	
+
 	// print_stacks(stack_one, stack_two);//
 	min = drop_to_b(&stack_one, &stack_two, len);
 	len_a = lst_len(stack_one);
@@ -214,7 +217,7 @@ void	predict_in_a(t_lswap *s1, t_lswap *s2, int buf, int len_a)
 	while (s1 != NULL)
 	{
 		//ft_printf("len A = %d\n", len_a);
-		if ((prev < buf && buf < s1->num) || (prev == max && buf < s1->num))//?????????????????????/
+		if ((prev < buf && buf < s1->num) || (prev == max && buf < s1->num))//???
 		{
 			if (pos1 > len_a / 2)
 			{

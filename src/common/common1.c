@@ -6,13 +6,13 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/13 11:05:07 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/14 20:53:39 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/common.h"
 
-void		process_stack(int *argc, char ***argv, t_lswap *nums)
+int		process_stack(int *argc, char ***argv, t_lswap *nums)
 {
 	long long	num;
 	t_lswap		*nums_check;
@@ -29,6 +29,11 @@ void		process_stack(int *argc, char ***argv, t_lswap *nums)
 		curr_arg = ft_strsplit((*argv)[args], ' ');
 		while (*curr_arg != NULL)
 		{
+			if (!ft_strcmp(*curr_arg, "-v"))
+			{
+
+				continue;
+			}
 			num = ft_atoi_simple_big(*curr_arg);//?
 			if (num < -2147483648 || 2147483647 < num)
 			{

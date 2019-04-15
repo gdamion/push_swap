@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:34 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/15 13:40:41 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:41:47 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ int			main(int argc, char **argv)
 	t_lswap	*stack_one;
 	t_lswap *stack_two;
 
+	(argc == 1) ? exit(0) : 1;
 	if (!(stack_one = (t_lswap*)malloc(sizeof(t_lswap)))
 		|| !(cmds = (t_lswap*)malloc(sizeof(t_lswap))))
 		error();
 	process_stack(&argc, &argv, stack_one);
 	read_instructions(cmds);
 	result(cmds, stack_one, stack_two);
-	return (0);
+	exit(0);
 }
 
 int			read_instructions(t_lswap *cmds)

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:41 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/15 17:04:48 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:40:54 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ int		main(int argc, char **argv)
 {
 	t_lswap	*stack_one;
 	t_lswap *stack_two;
+	int		len;
 
 	if (!(stack_one = (t_lswap*)malloc(sizeof(t_lswap))))
 		error();
 	el_zerofill(stack_one);
-	process_stack(&argc, &argv, stack_one);
-	if (!ordered(stack_one, argc - 1))
-		magic(stack_one, stack_two, argc - 1);
-	return (0);
+	len = process_stack(&argc, &argv, stack_one);
+	if (!ordered(stack_one, len))
+		magic(stack_one, stack_two, len);
+	exit(0);
 }
 
 int		ordered(t_lswap *s, int len)
@@ -73,7 +74,7 @@ void	rotate(t_lswap *s, int len, int min)
 			s_rotate(&s, 1, 1);
 }
 
-void	magic(t_lswap *stack_one, t_lswap *stack_two, int len, int flag)
+void	magic(t_lswap *stack_one, t_lswap *stack_two, int len)
 {
 	int		len_a;
 	int		len_b;
@@ -83,6 +84,8 @@ void	magic(t_lswap *stack_one, t_lswap *stack_two, int len, int flag)
 	min = drop_to_b(&stack_one, &stack_two, len);
 	len_a = lst_len(stack_one);
 	len_b = lst_len(stack_two);
+	//print_stacks(stack_one, stack_two);
+	//ft_printf("len = %d, len a = %d, len b = %d, min = %d\n", len, len_a, len_b, min);
 	while (len_b > 0)
 	{
 		predict_all(stack_one, stack_two, len_a, len_b);

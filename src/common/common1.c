@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:37 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/15 16:54:56 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/15 18:44:10 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		process_stack(int *argc, char ***argv, t_lswap *nums)
 {
 	int			args;
 	char		**curr_arg;
-	int			flag;
 	int			i;
 
 	args = 1;
@@ -26,38 +25,35 @@ int		process_stack(int *argc, char ***argv, t_lswap *nums)
 	while (args < (*argc))
 	{
 		curr_arg = ft_strsplit((*argv)[args], ' ');
-		foreach_arg(&nums, &curr_arg, &i);
+		foreach_arg(&nums, curr_arg, &i);
 		args++;
 	}
-	nums->next = NULL;
-	return (flag);
+	return (i);
 }
 
-int		foreach_arg(t_lswap **nums, char ***curr_arg, int *i)
+void		foreach_arg(t_lswap **nums, char **curr_arg, int *i)
 {
 	long long	num;
-	int			flag;
+	int			a;
 
-	while (**curr_arg != NULL)
+	a = 0;
+	while (curr_arg[a] != NULL)
 	{
-		if (!ft_strcmp(**curr_arg, "-v"))
-		{
-			flag = 1;
-			continue;
-		}
-		num = ft_atoi_simple_big(**curr_arg);
+		num = ft_atoi_simple_big(curr_arg[a]);
 		if (num < -2147483648 || 2147483647 < num)
 			error();
 		if (*i > 0)
 			add_el_and_check(nums, num);
 		(*nums)->num = (int)num;
+		(*nums)->next = NULL;
 		(*i)++;
-		(*curr_arg)++;
+		free(curr_arg[a]);
+		a++;
 	}
-	return (flag);
+	free(curr_arg);
 }
 
-void	add_el_and_check(t_lswap **nums, int num)
+void	add_el_and_check(t_lswap **nums, long long num)
 {
 	t_lswap		*nums_check;
 
@@ -69,6 +65,8 @@ void	add_el_and_check(t_lswap **nums, int num)
 			error();
 		nums_check = nums_check->prev;
 	}
+	if (num == nums_check->num)
+			error();
 }
 
 void	add_next(t_lswap **curr)

@@ -6,25 +6,20 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 11:34:59 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/14 19:20:41 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/15 12:12:57 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/gnl.h"
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-
-static void	gol_ops_one(char **obj, char **tmp)
+static void		gol_ops_one(char **obj, char **tmp)
 {
 	if (*obj)
 		free(*obj);
 	*obj = *tmp;
 }
 
-static void	gol_ops_two(int *i, char **content)
+static void		gol_ops_two(int *i, char **content)
 {
 	while ((*content)[*i] != '\0')
 	{
@@ -34,14 +29,14 @@ static void	gol_ops_two(int *i, char **content)
 	}
 }
 
-static int	get_one_line(char **line, const int fd, char **c, int *e)
+static int		get_one_line(char **line, const int fd, char **c, int *e)
 {
 	char		buf[BUFF_SIZE + 1];
 	int			rd;
 	int			i;
 	char		*tmp;
 
-	while (rd = read(fd, buf, BUFF_SIZE))
+	while ((rd = read(fd, buf, BUFF_SIZE)))
 	{
 		buf[rd] = '\0';
 		if (rd == -1 || !(tmp = ft_strjoin(*c, buf)))
@@ -63,9 +58,9 @@ static int	get_one_line(char **line, const int fd, char **c, int *e)
 	return (get_one_line(line, fd, c, e));
 }
 
-static t_files	*get_correct_el(t_files	**start, int fd)
+static t_files	*get_correct_el(t_files **start, int fd)
 {
-	t_files	*run;
+	t_files *run;
 
 	run = *start;
 	while (run)
@@ -85,7 +80,7 @@ static t_files	*get_correct_el(t_files	**start, int fd)
 	return (run);
 }
 
-int			get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static t_files	*files;
 	t_files			*curr;
@@ -93,27 +88,5 @@ int			get_next_line(const int fd, char **line)
 	if (fd < 0 || line == NULL)
 		return (-1);
 	curr = get_correct_el(&files, fd);
-
 	return (get_one_line(line, fd, &(curr->content), &(curr->endl)));
 }
-
-// int main()
-// {
-// 	char *test;
-// 	int a;
-
-// 	int fd = open("test.txt", O_RDONLY);
-// 		//printf("%d\n", rd);
-// 	int i = 0;
-
-
-// 	while(a)
-// 	{
-// 		test = NULL;
-// 		a = get_next_line(fd, &test);
-// 		printf("gnl out = %d| string = %s|\n", a, test);
-// 		i++;
-// 	}
-// 	close(fd);
-// 	return (0);
-// }

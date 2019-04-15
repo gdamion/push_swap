@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 15:20:04 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/14 19:21:28 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/15 15:29:32 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-# define BUFF_SIZE 10
+# define BUFF_SIZE 1
 
 typedef struct		s_files
 {

@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:03:52 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/15 13:38:14 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/15 17:05:08 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "common.h"
 
 
-int		ordered(t_lswap	*s, int len, int flag);
+int		ordered(t_lswap	*s, int len);
 void	rotate(t_lswap *s, int len, int min);
 
-void	magic(t_lswap *stack_one, t_lswap *stack_two, int len, int flag);
+void	magic(t_lswap *stack_one, t_lswap *stack_two, int len);
 
 int		drop_to_b(t_lswap **stack_one, t_lswap **stack_two, int len);
 void	sort_rest(t_lswap **s, int min, int max);

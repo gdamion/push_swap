@@ -6,7 +6,7 @@
 /*   By: gdamion- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:04:35 by gdamion-          #+#    #+#             */
-/*   Updated: 2019/04/15 13:41:17 by gdamion-         ###   ########.fr       */
+/*   Updated: 2019/04/15 16:53:34 by gdamion-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ long long			ft_atoi_simple_big();
 
 void				add_next(t_lswap **curr);
 int					process_stack(int *argc, char ***argv, t_lswap *nums);
+int					foreach_arg(t_lswap **nums, char ***curr_arg, int *i);
+void				add_el_and_check(t_lswap **nums, int num);
 
 int					s_swap(t_lswap **s, int stack_n, int mode);
 int					s_swap_both(t_lswap **s1, t_lswap **s2, int mode);
